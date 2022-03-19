@@ -4,6 +4,12 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
 
+if (localStorage.getItem('highscore')) {
+  highscore = +localStorage.getItem('highscore');
+}
+
+document.getElementById('highscore').textContent = '' + highscore;
+
 const displayMessage = function (message: string) {
   document.getElementById('message').textContent = message;
 };
@@ -26,6 +32,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.getElementById('number').style.width = '30rem';
     if (score > highscore) {
       highscore = score;
+      localStorage.setItem('highscore', '' + highscore);
       document.getElementById('highscore').textContent = '' + highscore;
     }
 
@@ -50,5 +57,5 @@ document.querySelector('.again').addEventListener('click', function () {
   document.getElementById('number').textContent = '?';
   (document.getElementById('guess') as HTMLInputElement).value = '';
   document.querySelector('body').style.backgroundColor = '#222';
-  document.getElementById('.number').style.width = '15rem';
+  document.getElementById('number').style.width = '15rem';
 });
